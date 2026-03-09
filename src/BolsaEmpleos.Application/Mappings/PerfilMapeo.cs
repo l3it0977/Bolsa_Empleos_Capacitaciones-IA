@@ -6,6 +6,7 @@ using BolsaEmpleos.Application.DTOs.OfertaTrabajo;
 using BolsaEmpleos.Application.DTOs.Habilidad;
 using BolsaEmpleos.Application.DTOs.Curso;
 using BolsaEmpleos.Application.DTOs.Evaluacion;
+using BolsaEmpleos.Application.DTOs.Postulacion;
 using BolsaEmpleos.Domain.Entities;
 
 namespace BolsaEmpleos.Application.Mappings;
@@ -62,5 +63,12 @@ public class PerfilMapeo : Profile
             .ForMember(dest => dest.NombreJoven,
                 opt => opt.MapFrom(src => src.Joven.Nombre + " " + src.Joven.Apellido))
             .ForMember(dest => dest.TituloCurso, opt => opt.MapFrom(src => src.Curso.Titulo));
+
+        // Mapeos de Postulacion
+        CreateMap<Postulacion, PostulacionDto>()
+            .ForMember(dest => dest.NombreJoven,
+                opt => opt.MapFrom(src => src.Joven.Nombre + " " + src.Joven.Apellido))
+            .ForMember(dest => dest.TituloOferta,
+                opt => opt.MapFrom(src => src.OfertaTrabajo.Titulo));
     }
 }

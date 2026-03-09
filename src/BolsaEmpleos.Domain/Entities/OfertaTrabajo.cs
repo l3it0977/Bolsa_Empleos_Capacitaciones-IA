@@ -34,4 +34,7 @@ public class OfertaTrabajo : EntidadBase
 
     // Lista de requisitos que deben cumplir los candidatos (relacion uno a muchos)
     public ICollection<Requisito> Requisitos { get; set; } = new List<Requisito>();
+
+    // Postulaciones recibidas para esta oferta (relacion uno a muchos)
+    public ICollection<Postulacion> Postulaciones { get; set; } = new List<Postulacion>();
 }
