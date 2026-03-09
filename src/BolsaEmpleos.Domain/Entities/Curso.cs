@@ -26,7 +26,7 @@ public class Curso : EntidadBase
     public string? UrlMaterial { get; set; }
 
     // Puntaje minimo (sobre 100) que debe obtener el joven para aprobar
-    public int PuntajeMinimAprobacion { get; set; } = 70;
+    public int PuntajeMinimoAprobacion { get; set; } = 70;
 
     // Evaluaciones de jovenes que han tomado este curso (relacion uno a muchos)
     public ICollection<Evaluacion> Evaluaciones { get; set; } = new List<Evaluacion>();

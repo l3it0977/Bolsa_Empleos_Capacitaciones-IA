@@ -10,6 +10,6 @@ public class CursoDto
     public string NombreHabilidad { get; set; } = string.Empty;
     public decimal DuracionHoras { get; set; }
     public string? UrlMaterial { get; set; }
-    public int PuntajeMinimAprobacion { get; set; }
+    public int PuntajeMinimoAprobacion { get; set; }
     public bool Activo { get; set; }
 }

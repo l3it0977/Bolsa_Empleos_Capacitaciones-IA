@@ -72,7 +72,7 @@ public class ServicioCurso : IServicioCurso
         curso.HabilidadId = dto.HabilidadId;
         curso.DuracionHoras = dto.DuracionHoras;
         curso.UrlMaterial = dto.UrlMaterial;
-        curso.PuntajeMinimAprobacion = dto.PuntajeMinimAprobacion;
+        curso.PuntajeMinimoAprobacion = dto.PuntajeMinimoAprobacion;
         curso.FechaModificacion = DateTime.UtcNow;
 
         await _repositorioCurso.ActualizarAsync(curso);

@@ -14,7 +14,7 @@ public interface IRepositorioEvaluacion : IRepositorio<Evaluacion>
     Task<Evaluacion?> ObtenerPorJovenYCursoAsync(int jovenId, int cursoId);
 
     // Obtiene todas las evaluaciones aprobadas de un joven
-    Task<IEnumerable<Evaluacion>> ObtenerAprobadaspPorJovenAsync(int jovenId);
+    Task<IEnumerable<Evaluacion>> ObtenerAprobadasPorJovenAsync(int jovenId);
 
     // Obtiene evaluaciones filtradas por estado
     Task<IEnumerable<Evaluacion>> ObtenerPorEstadoAsync(EstadoEvaluacion estado);

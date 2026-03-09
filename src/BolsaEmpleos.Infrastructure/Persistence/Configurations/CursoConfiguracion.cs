@@ -36,8 +36,8 @@ public class CursoConfiguracion : IEntityTypeConfiguration<Curso>
             .HasColumnName("url_material")
             .HasMaxLength(500);
 
-        constructor.Property(c => c.PuntajeMinimAprobacion)
-            .HasColumnName("puntaje_minim_aprobacion")
+        constructor.Property(c => c.PuntajeMinimoAprobacion)
+            .HasColumnName("puntaje_minimo_aprobacion")
             .IsRequired()
             .HasDefaultValue(70);
 

@@ -36,7 +36,7 @@ public class RepositorioEvaluacion : Repositorio<Evaluacion>, IRepositorioEvalua
     }
 
     // Obtiene todas las evaluaciones aprobadas de un joven
-    public async Task<IEnumerable<Evaluacion>> ObtenerAprobadaspPorJovenAsync(int jovenId)
+    public async Task<IEnumerable<Evaluacion>> ObtenerAprobadasPorJovenAsync(int jovenId)
     {
         return await _conjunto
             .Include(e => e.Curso)

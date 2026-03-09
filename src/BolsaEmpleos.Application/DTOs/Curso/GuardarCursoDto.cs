@@ -24,5 +24,5 @@ public class GuardarCursoDto
 
     // Puntaje minimo requerido para aprobar (entre 0 y 100)
     [Range(0, 100, ErrorMessage = "El puntaje minimo debe estar entre 0 y 100.")]
-    public int PuntajeMinimAprobacion { get; set; } = 70;
+    public int PuntajeMinimoAprobacion { get; set; } = 70;
 }

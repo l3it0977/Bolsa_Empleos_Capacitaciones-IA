@@ -105,7 +105,7 @@ public class ServicioEvaluacion : IServicioEvaluacion
         evaluacion.FechaModificacion = DateTime.UtcNow;
 
         // Determinar si el joven aprobo segun el puntaje minimo definido en el curso
-        if (dto.PuntajeObtenido >= curso.PuntajeMinimAprobacion)
+        if (dto.PuntajeObtenido >= curso.PuntajeMinimoAprobacion)
         {
             evaluacion.Estado = EstadoEvaluacion.Aprobada;
 
