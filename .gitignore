@@ -1,0 +1,29 @@
+# Artefactos de compilacion de .NET
+**/bin/
+**/obj/
+
+# Archivos de configuracion local con secretos
+**/appsettings.Local.json
+**/appsettings.*.Local.json
+
+# Archivos de migracion generados automaticamente (se excluyen del control de versiones
+# para evitar conflictos; se regeneran con: dotnet ef migrations add <Nombre>)
+# Descomentar la siguiente linea si no se desean versionar las migraciones:
+# **/Migrations/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Carpetas de IDE
+.vs/
+.vscode/
+.idea/
+
+# Paquetes NuGet restaurados
+.nuget/
+
+# Resultados de pruebas
+TestResults/
+*.trx
+*.coverage
