@@ -1,4 +1,6 @@
+using BolsaEmpleos.Application.Interfaces;
 using BolsaEmpleos.Domain.Interfaces;
+using BolsaEmpleos.Infrastructure.IA;
 using BolsaEmpleos.Infrastructure.Persistence.Context;
 using BolsaEmpleos.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +35,23 @@ public static class DependencyInjection
         services.AddScoped<IRepositorioEvaluacion, RepositorioEvaluacion>();
         services.AddScoped<IRepositorioPostulacion, RepositorioPostulacion>();
 
+        // Configurar el cliente HTTP para NotebookLM y registrar la implementacion de IClienteIA
+        services.Configure<ConfiguracionNotebookLM>(opciones =>
+            configuracion.GetSection("NotebookLM").Bind(opciones));
+
+        services.AddHttpClient<IClienteIA, ClienteNotebookLM>(cliente =>
+        {
+            var urlBase = configuracion["NotebookLM:UrlBase"];
+            if (!string.IsNullOrWhiteSpace(urlBase))
+            {
+                cliente.BaseAddress = new Uri(urlBase);
+            }
+
+            var tiempoEspera = configuracion.GetValue<int>("NotebookLM:TiempoEsperaSegundos", 30);
+            cliente.Timeout = TimeSpan.FromSeconds(tiempoEspera);
+        });
+
         return services;
     }
 }
+
