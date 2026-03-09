@@ -34,4 +34,7 @@ public class Joven : EntidadBase
 
     // Evaluaciones de cursos que ha tomado el joven (relacion uno a muchos)
     public ICollection<Evaluacion> Evaluaciones { get; set; } = new List<Evaluacion>();
+
+    // Postulaciones a ofertas de trabajo realizadas por el joven (relacion uno a muchos)
+    public ICollection<Postulacion> Postulaciones { get; set; } = new List<Postulacion>();
 }

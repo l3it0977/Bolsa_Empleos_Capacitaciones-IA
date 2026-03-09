@@ -31,6 +31,7 @@ public static class DependencyInjection
         services.AddScoped<IRepositorioHabilidad, RepositorioHabilidad>();
         services.AddScoped<IRepositorioCurso, RepositorioCurso>();
         services.AddScoped<IRepositorioEvaluacion, RepositorioEvaluacion>();
+        services.AddScoped<IRepositorioPostulacion, RepositorioPostulacion>();
 
         return services;
     }

@@ -40,6 +40,9 @@ public class BolsaEmpleosDbContext : DbContext
     // Tabla de evaluaciones de jovenes sobre cursos
     public DbSet<Evaluacion> Evaluaciones { get; set; }
 
+    // Tabla de postulaciones de jovenes a ofertas de trabajo
+    public DbSet<Postulacion> Postulaciones { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
