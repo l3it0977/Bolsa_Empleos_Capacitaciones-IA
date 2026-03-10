@@ -199,6 +199,21 @@ public class ServicioPostulacion : IServicioPostulacion
         return postulacion is null ? null : _mapper.Map<PostulacionDto>(postulacion);
     }
 
+    // Actualiza el estado de una postulacion y registra el feedback de la empresa
+    public async Task<PostulacionDto?> ActualizarEstadoAsync(int postulacionId, EstadoPostulacion nuevoEstado)
+    {
+        var postulacion = await _repositorioPostulacion.ObtenerPorIdAsync(postulacionId);
+        if (postulacion is null) return null;
+
+        // Actualizar el estado con el feedback de la empresa
+        postulacion.Estado = nuevoEstado;
+        await _repositorioPostulacion.ActualizarAsync(postulacion);
+
+        // Recargar con relaciones para el mapeo
+        var postulacionActualizada = await _repositorioPostulacion.ObtenerPorIdAsync(postulacionId);
+        return _mapper.Map<PostulacionDto>(postulacionActualizada!);
+    }
+
     // Obtiene el conjunto de identificadores de habilidades del curriculum del joven.
     // Retorna un conjunto vacio si el joven no tiene curriculum o no tiene habilidades.
     private static HashSet<int> ObtenerHabilidadesDelCurriculum(Joven joven)

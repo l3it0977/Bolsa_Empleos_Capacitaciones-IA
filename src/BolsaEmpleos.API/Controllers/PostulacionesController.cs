@@ -1,5 +1,6 @@
 using BolsaEmpleos.Application.DTOs.Postulacion;
 using BolsaEmpleos.Application.Interfaces;
+using BolsaEmpleos.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BolsaEmpleos.API.Controllers;
@@ -87,5 +88,17 @@ public class PostulacionesController : ControllerBase
             // Retorna 409 Conflict cuando ya existe postulacion o el joven no puede postularse
             return Conflict(new { mensaje = ex.Message });
         }
+    }
+
+    // PATCH api/postulaciones/{id}/estado - Actualiza el estado de una postulacion (feedback de empresa)
+    [HttpPatch("{id:int}/estado")]
+    [ProducesResponseType(typeof(PostulacionDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> ActualizarEstado(int id, [FromBody] EstadoPostulacion nuevoEstado)
+    {
+        var postulacion = await _servicioPostulacion.ActualizarEstadoAsync(id, nuevoEstado);
+        if (postulacion is null) return NotFound();
+        return Ok(postulacion);
     }
 }

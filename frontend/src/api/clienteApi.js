@@ -168,3 +168,60 @@ export async function evaluarRespuestasIA(solicitud) {
   const respuesta = await instanciaApi.post('/api/evaluacion-ia/evaluar', solicitud);
   return respuesta.data;
 }
+
+// ---------------------------------------------------------------
+// EMPRESAS
+// ---------------------------------------------------------------
+
+/** Registra una nueva empresa en el sistema */
+export async function registrarEmpresa(datosEmpresa) {
+  const respuesta = await instanciaApi.post('/api/empresas', datosEmpresa);
+  return respuesta.data;
+}
+
+/** Obtiene el perfil de una empresa por su id */
+export async function obtenerEmpresa(empresaId) {
+  const respuesta = await instanciaApi.get(`/api/empresas/${empresaId}`);
+  return respuesta.data;
+}
+
+/** Actualiza los datos de una empresa */
+export async function actualizarEmpresa(empresaId, datosEmpresa) {
+  const respuesta = await instanciaApi.put(`/api/empresas/${empresaId}`, datosEmpresa);
+  return respuesta.data;
+}
+
+/** Obtiene todas las ofertas de una empresa */
+export async function obtenerOfertasPorEmpresa(empresaId) {
+  const respuesta = await instanciaApi.get(`/api/ofertas-trabajo/empresa/${empresaId}`);
+  return respuesta.data;
+}
+
+/** Crea una nueva oferta para una empresa */
+export async function crearOferta(empresaId, datosOferta) {
+  const respuesta = await instanciaApi.post(`/api/ofertas-trabajo/empresa/${empresaId}`, datosOferta);
+  return respuesta.data;
+}
+
+/** Cambia el estado de una oferta */
+export async function cambiarEstadoOferta(ofertaId, nuevoEstado) {
+  const respuesta = await instanciaApi.patch(`/api/ofertas-trabajo/${ofertaId}/estado`, nuevoEstado);
+  return respuesta.data;
+}
+
+/** Elimina una oferta */
+export async function eliminarOferta(ofertaId) {
+  await instanciaApi.delete(`/api/ofertas-trabajo/${ofertaId}`);
+}
+
+/** Obtiene los postulantes de una oferta */
+export async function obtenerPostulantesOferta(ofertaId) {
+  const respuesta = await instanciaApi.get(`/api/postulaciones/oferta/${ofertaId}`);
+  return respuesta.data;
+}
+
+/** Actualiza el estado de una postulacion (envio de feedback) */
+export async function actualizarEstadoPostulacion(postulacionId, nuevoEstado) {
+  const respuesta = await instanciaApi.patch(`/api/postulaciones/${postulacionId}/estado`, nuevoEstado);
+  return respuesta.data;
+}
