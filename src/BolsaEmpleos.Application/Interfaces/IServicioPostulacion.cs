@@ -1,4 +1,5 @@
 using BolsaEmpleos.Application.DTOs.Postulacion;
+using BolsaEmpleos.Domain.Enums;
 
 namespace BolsaEmpleos.Application.Interfaces;
 
@@ -22,4 +23,7 @@ public interface IServicioPostulacion
 
     // Obtiene una postulacion por su identificador unico
     Task<PostulacionDto?> ObtenerPorIdAsync(int id);
+
+    // Actualiza el estado de una postulacion y registra el feedback de la empresa
+    Task<PostulacionDto?> ActualizarEstadoAsync(int postulacionId, EstadoPostulacion nuevoEstado);
 }
