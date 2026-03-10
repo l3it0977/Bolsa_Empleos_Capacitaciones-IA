@@ -27,3 +27,9 @@ Thumbs.db
 TestResults/
 *.trx
 *.coverage
+
+# Dependencias del frontend
+frontend/node_modules/
+
+# Artefactos de build del frontend
+frontend/dist/

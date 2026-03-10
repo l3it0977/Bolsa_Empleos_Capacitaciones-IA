@@ -1,0 +1,682 @@
+/* Estilos globales de la aplicacion Bolsa de Empleos */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #1a1a1a;
+}
+
+/* ---------------------------------------------------------------
+   NAVEGACION
+---------------------------------------------------------------- */
+
+.navegacion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1a237e;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navegacion-marca a {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navegacion-enlaces {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+}
+
+.navegacion-enlaces a {
+  color: #e8eaf6;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.navegacion-enlaces a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.boton-cerrar-sesion {
+  background: transparent;
+  border: 1px solid #e8eaf6;
+  color: #e8eaf6;
+  cursor: pointer;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.boton-cerrar-sesion:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ---------------------------------------------------------------
+   CONTENIDO PRINCIPAL
+---------------------------------------------------------------- */
+
+.contenido-principal {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ---------------------------------------------------------------
+   CONTENEDORES
+---------------------------------------------------------------- */
+
+.contenedor-formulario {
+  max-width: 620px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.contenedor-pagina {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: #1a237e;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 1.5rem 0 0.75rem;
+  color: #283593;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 1rem 0 0.5rem;
+  color: #37474f;
+}
+
+.descripcion-seccion {
+  color: #546e7a;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------------------------------------------------------------
+   FORMULARIOS
+---------------------------------------------------------------- */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.campo label {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #37474f;
+  font-size: 0.95rem;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #b0bec5;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #1a1a1a;
+  background-color: #fafafa;
+  transition: border-color 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: #1a237e;
+  background-color: #ffffff;
+}
+
+.grupo-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 520px) {
+  .grupo-campos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------
+   BOTONES
+---------------------------------------------------------------- */
+
+.boton-primario {
+  background-color: #1a237e;
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.boton-primario:hover:not(:disabled) {
+  background-color: #283593;
+}
+
+.boton-primario:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.boton-secundario {
+  background-color: #e8eaf6;
+  color: #1a237e;
+  border: 1px solid #9fa8da;
+  padding: 0.55rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.boton-secundario:hover {
+  background-color: #c5cae9;
+}
+
+.boton-volver {
+  background: transparent;
+  border: none;
+  color: #1a237e;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  margin-bottom: 1rem;
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------
+   MENSAJES
+---------------------------------------------------------------- */
+
+.mensaje-error {
+  background-color: #ffebee;
+  border: 1px solid #ef9a9a;
+  border-radius: 4px;
+  color: #c62828;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.mensaje-exito {
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 4px;
+  color: #2e7d32;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ---------------------------------------------------------------
+   CARGANDO
+---------------------------------------------------------------- */
+
+.cargando-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+  color: #546e7a;
+}
+
+.cargando-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e8eaf6;
+  border-top-color: #1a237e;
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------------------------------------------------------------
+   GRILLA DE TARJETAS
+---------------------------------------------------------------- */
+
+.grilla-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.tarjeta-oferta,
+.tarjeta-curso,
+.tarjeta-postulacion {
+  background-color: #f9f9fb;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.titulo-oferta,
+.titulo-curso {
+  font-size: 1.1rem;
+  color: #1a237e;
+  margin: 0;
+}
+
+.empresa-oferta,
+.empresa-postulacion {
+  font-weight: 600;
+  color: #37474f;
+}
+
+.ubicacion-oferta,
+.duracion-curso {
+  color: #607d8b;
+  font-size: 0.9rem;
+}
+
+.salario-oferta {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.fecha-cierre-oferta {
+  color: #e65100;
+  font-size: 0.9rem;
+}
+
+.descripcion-oferta,
+.descripcion-curso {
+  color: #546e7a;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.puntaje-minimo {
+  color: #37474f;
+  font-size: 0.9rem;
+}
+
+.habilidad-curso {
+  color: #4527a0;
+  font-size: 0.9rem;
+}
+
+.acciones-tarjeta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.enlace-material {
+  display: inline-block;
+  color: #1a237e;
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.sin-resultados {
+  text-align: center;
+  padding: 2rem;
+  color: #607d8b;
+}
+
+/* ---------------------------------------------------------------
+   ESTADO DE EVALUACION
+---------------------------------------------------------------- */
+
+.estado-evaluacion {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.25rem 0;
+}
+
+.estado-0 { color: #f57f17; }
+.estado-1 { color: #1565c0; }
+.estado-2 { color: #2e7d32; }
+.estado-3 { color: #c62828; }
+
+/* ---------------------------------------------------------------
+   DETALLE DE OFERTA
+---------------------------------------------------------------- */
+
+.detalle-oferta {
+  margin-bottom: 1.5rem;
+}
+
+.lista-requisitos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item-requisito {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+}
+
+.etiqueta-obligatorio {
+  color: #c62828;
+  font-size: 0.85rem;
+}
+
+.seccion-postulacion {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.resultado-evaluacion {
+  margin-top: 1rem;
+}
+
+.evaluacion-aprobada {
+  color: #2e7d32;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.evaluacion-rechazada {
+  color: #c62828;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.lista-brechas {
+  background-color: #fff3e0;
+  border: 1px solid #ffcc80;
+  border-radius: 4px;
+  padding: 0.75rem 1rem 0.75rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.lista-cursos-sugeridos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item-curso-sugerido {
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+/* ---------------------------------------------------------------
+   HABILIDADES
+---------------------------------------------------------------- */
+
+.seccion-habilidades {
+  margin-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1.5rem;
+}
+
+.lista-etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.etiqueta-habilidad {
+  background-color: #e8eaf6;
+  color: #283593;
+  border-radius: 20px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.9rem;
+}
+
+.insignia-curso {
+  color: #4527a0;
+  font-size: 0.8rem;
+}
+
+.grilla-habilidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.tarjeta-habilidad {
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.nombre-habilidad {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.categoria-habilidad {
+  color: #607d8b;
+  font-size: 0.85rem;
+}
+
+/* ---------------------------------------------------------------
+   EXAMEN
+---------------------------------------------------------------- */
+
+.informacion-examen {
+  background-color: #e8eaf6;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.informacion-examen p {
+  margin-bottom: 0.4rem;
+}
+
+.aviso-material {
+  background-color: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.lista-preguntas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.item-pregunta {
+  background-color: #f9f9fb;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.texto-pregunta {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.lista-opciones {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.opcion-respuesta label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.respuesta-abierta {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #b0bec5;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.respuesta-abierta:focus {
+  outline: none;
+  border-color: #1a237e;
+}
+
+.acciones-examen {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ---------------------------------------------------------------
+   RESULTADO DEL EXAMEN
+---------------------------------------------------------------- */
+
+.resultado-final {
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.resultado-aprobado {
+  background-color: #e8f5e9;
+  border: 2px solid #66bb6a;
+}
+
+.resultado-desaprobado {
+  background-color: #ffebee;
+  border: 2px solid #ef9a9a;
+}
+
+.puntaje-resultado {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.estado-resultado {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.titulo-curso-resultado {
+  color: #546e7a;
+  margin-bottom: 1rem;
+}
+
+.retroalimentacion {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.feedback-preguntas {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.feedback-preguntas ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.item-feedback {
+  padding: 0.75rem;
+  border-radius: 4px;
+}
+
+.item-feedback p {
+  margin-bottom: 0.25rem;
+}
+
+.correcto {
+  background-color: #f1f8e9;
+  border-left: 4px solid #66bb6a;
+}
+
+.incorrecto {
+  background-color: #fce4ec;
+  border-left: 4px solid #ef9a9a;
+}
+
+.acciones-resultado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------------------------------------------------------------
+   POSTULACIONES
+---------------------------------------------------------------- */
+
+.fecha-postulacion {
+  color: #607d8b;
+  font-size: 0.9rem;
+}
+
+.estado-postulacion {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.estado-0 { color: #f57f17; }
+.estado-1 { color: #1565c0; }
+.estado-2 { color: #2e7d32; }
+.estado-3 { color: #c62828; }
+
+/* ---------------------------------------------------------------
+   ACCIONES DE NAVEGACION
+---------------------------------------------------------------- */
+
+.acciones-navegacion {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
