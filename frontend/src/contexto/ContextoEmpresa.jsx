@@ -17,15 +17,22 @@ export function ProveedorContextoEmpresa({ children }) {
   });
 
   /** Guarda la empresa en el estado y en localStorage al registrarse o iniciar sesion */
-  function iniciarSesionEmpresa(datosEmpresa) {
+  function iniciarSesionEmpresa(datosEmpresa, token = null) {
     setEmpresaActual(datosEmpresa);
     localStorage.setItem('empresaActual', JSON.stringify(datosEmpresa));
+    localStorage.removeItem('jovenActual');
+    localStorage.setItem('rolSesion', 'Empresa');
+    if (token) {
+      localStorage.setItem('tokenSesion', token);
+    }
   }
 
   /** Limpia la sesion de empresa */
   function cerrarSesionEmpresa() {
     setEmpresaActual(null);
     localStorage.removeItem('empresaActual');
+    localStorage.removeItem('tokenSesion');
+    localStorage.removeItem('rolSesion');
   }
 
   return (

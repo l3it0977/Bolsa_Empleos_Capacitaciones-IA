@@ -1,7 +1,9 @@
 using BolsaEmpleos.Application.DTOs.OfertaTrabajo;
 using BolsaEmpleos.Application.Interfaces;
 using BolsaEmpleos.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BolsaEmpleos.API.Controllers;
 
@@ -40,20 +42,24 @@ public class OfertasTrabajoController : ControllerBase
 
     // GET api/ofertas-trabajo/empresa/{empresaId} - Obtiene las ofertas de una empresa
     [HttpGet("empresa/{empresaId:int}")]
+    [Authorize(Roles = "Empresa")]
     [ProducesResponseType(typeof(IEnumerable<OfertaTrabajoDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> ObtenerPorEmpresa(int empresaId)
     {
+        if (!UsuarioCorrespondeAEmpresa(empresaId)) return Forbid();
         var ofertas = await _servicioOferta.ObtenerPorEmpresaAsync(empresaId);
         return Ok(ofertas);
     }
 
     // POST api/ofertas-trabajo/empresa/{empresaId} - Crea una nueva oferta para una empresa
     [HttpPost("empresa/{empresaId:int}")]
+    [Authorize(Roles = "Empresa")]
     [ProducesResponseType(typeof(OfertaTrabajoDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Crear(int empresaId, [FromBody] CrearOfertaTrabajoDto dto)
     {
+        if (!UsuarioCorrespondeAEmpresa(empresaId)) return Forbid();
         try
         {
             var oferta = await _servicioOferta.CrearAsync(empresaId, dto);
@@ -61,17 +67,22 @@ public class OfertasTrabajoController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return NotFound(new { mensaje = ex.Message });
+            return NotFound(new { message = ex.Message });
         }
     }
 
     // PATCH api/ofertas-trabajo/{id}/estado - Cambia el estado de una oferta
     [HttpPatch("{id:int}/estado")]
+    [Authorize(Roles = "Empresa")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> CambiarEstado(int id, [FromBody] EstadoOferta nuevoEstado)
     {
+        var oferta = await _servicioOferta.ObtenerPorIdAsync(id);
+        if (oferta is null) return NotFound();
+        if (!UsuarioCorrespondeAEmpresa(oferta.EmpresaId)) return Forbid();
+
         var actualizado = await _servicioOferta.CambiarEstadoAsync(id, nuevoEstado);
         if (!actualizado) return NotFound();
         return NoContent();
@@ -79,12 +90,23 @@ public class OfertasTrabajoController : ControllerBase
 
     // DELETE api/ofertas-trabajo/{id} - Elimina logicamente una oferta
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Empresa")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Eliminar(int id)
     {
+        var oferta = await _servicioOferta.ObtenerPorIdAsync(id);
+        if (oferta is null) return NotFound();
+        if (!UsuarioCorrespondeAEmpresa(oferta.EmpresaId)) return Forbid();
+
         var eliminado = await _servicioOferta.EliminarAsync(id);
         if (!eliminado) return NotFound();
         return NoContent();
+    }
+
+    private bool UsuarioCorrespondeAEmpresa(int empresaId)
+    {
+        var idClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return int.TryParse(idClaim, out var idToken) && idToken == empresaId;
     }
 }

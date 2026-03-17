@@ -1,6 +1,8 @@
 using BolsaEmpleos.Application.DTOs.Empresa;
 using BolsaEmpleos.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BolsaEmpleos.API.Controllers;
 
@@ -51,17 +53,19 @@ public class EmpresasController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return Conflict(new { mensaje = ex.Message });
+            return Conflict(new { message = ex.Message });
         }
     }
 
     // PUT api/empresas/{id} - Actualiza los datos de una empresa existente
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Empresa")]
     [ProducesResponseType(typeof(EmpresaDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Actualizar(int id, [FromBody] ActualizarEmpresaDto dto)
     {
+        if (!UsuarioCorrespondeAEmpresa(id)) return Forbid();
         var empresa = await _servicioEmpresa.ActualizarAsync(id, dto);
         if (empresa is null) return NotFound();
         return Ok(empresa);
@@ -69,12 +73,20 @@ public class EmpresasController : ControllerBase
 
     // DELETE api/empresas/{id} - Elimina logicamente una empresa
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Empresa")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Eliminar(int id)
     {
+        if (!UsuarioCorrespondeAEmpresa(id)) return Forbid();
         var eliminado = await _servicioEmpresa.EliminarAsync(id);
         if (!eliminado) return NotFound();
         return NoContent();
+    }
+
+    private bool UsuarioCorrespondeAEmpresa(int empresaId)
+    {
+        var idClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return int.TryParse(idClaim, out var idToken) && idToken == empresaId;
     }
 }

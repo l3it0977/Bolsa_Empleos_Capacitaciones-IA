@@ -5,9 +5,33 @@ import axios from 'axios';
 
 // Instancia de axios apuntando al backend .NET
 const instanciaApi = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5002',
   headers: { 'Content-Type': 'application/json' },
 });
+
+instanciaApi.interceptors.request.use(configuracion => {
+  const token = localStorage.getItem('tokenSesion');
+  if (token) {
+    configuracion.headers.Authorization = `Bearer ${token}`;
+  }
+  return configuracion;
+});
+
+instanciaApi.interceptors.response.use(
+  respuesta => respuesta,
+  error => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('tokenSesion');
+      localStorage.removeItem('rolSesion');
+      localStorage.removeItem('jovenActual');
+      localStorage.removeItem('empresaActual');
+      if (!window.location.pathname.startsWith('/login')) {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 // ---------------------------------------------------------------
 // JOVENES
@@ -223,5 +247,25 @@ export async function obtenerPostulantesOferta(ofertaId) {
 /** Actualiza el estado de una postulacion (envio de feedback) */
 export async function actualizarEstadoPostulacion(postulacionId, nuevoEstado) {
   const respuesta = await instanciaApi.patch(`/api/postulaciones/${postulacionId}/estado`, nuevoEstado);
+  return respuesta.data;
+}
+
+// ---------------------------------------------------------------
+// AUTENTICACION
+// ---------------------------------------------------------------
+
+export async function loginJoven(correoElectronico, contrasena) {
+  const respuesta = await instanciaApi.post('/api/auth/login-joven', {
+    correoElectronico,
+    contrasena,
+  });
+  return respuesta.data;
+}
+
+export async function loginEmpresa(correoElectronico, contrasena) {
+  const respuesta = await instanciaApi.post('/api/auth/login-empresa', {
+    correoElectronico,
+    contrasena,
+  });
   return respuesta.data;
 }

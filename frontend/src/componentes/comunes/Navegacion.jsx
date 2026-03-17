@@ -12,12 +12,12 @@ export default function Navegacion() {
 
   function manejarCerrarSesionJoven() {
     cerrarSesion();
-    navegar('/registro');
+    navegar('/login');
   }
 
   function manejarCerrarSesionEmpresa() {
     cerrarSesionEmpresa();
-    navegar('/empresa/registro');
+    navegar('/login');
   }
 
   return (
@@ -58,8 +58,9 @@ export default function Navegacion() {
       {/* Navegacion sin sesion activa */}
       {!jovenActual && !empresaActual && (
         <ul className="navegacion-enlaces">
-          <li><Link to="/registro">Soy Candidato</Link></li>
-          <li><Link to="/empresa/registro">Soy Empresa</Link></li>
+          <li><Link to="/login">Iniciar Sesion</Link></li>
+          <li><Link to="/registro">Registro Candidato</Link></li>
+          <li><Link to="/empresa/registro">Registro Empresa</Link></li>
         </ul>
       )}
     </nav>

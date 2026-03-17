@@ -1,6 +1,8 @@
 using BolsaEmpleos.Application.DTOs.Joven;
 using BolsaEmpleos.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BolsaEmpleos.API.Controllers;
 
@@ -51,17 +53,19 @@ public class JovenesController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            return Conflict(new { mensaje = ex.Message });
+            return Conflict(new { message = ex.Message });
         }
     }
 
     // PUT api/jovenes/{id} - Actualiza los datos de un joven existente
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Joven")]
     [ProducesResponseType(typeof(JovenDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Actualizar(int id, [FromBody] ActualizarJovenDto dto)
     {
+        if (!UsuarioCorrespondeAJoven(id)) return Forbid();
         var joven = await _servicioJoven.ActualizarAsync(id, dto);
         if (joven is null) return NotFound();
         return Ok(joven);
@@ -69,12 +73,20 @@ public class JovenesController : ControllerBase
 
     // DELETE api/jovenes/{id} - Elimina logicamente un joven
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Joven")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Eliminar(int id)
     {
+        if (!UsuarioCorrespondeAJoven(id)) return Forbid();
         var eliminado = await _servicioJoven.EliminarAsync(id);
         if (!eliminado) return NotFound();
         return NoContent();
+    }
+
+    private bool UsuarioCorrespondeAJoven(int jovenId)
+    {
+        var idClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return int.TryParse(idClaim, out var idToken) && idToken == jovenId;
     }
 }
