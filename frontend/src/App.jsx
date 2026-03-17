@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProveedorContextoJoven } from './contexto/ContextoJoven';
 import { ProveedorContextoEmpresa } from './contexto/ContextoEmpresa';
 import Navegacion from './componentes/comunes/Navegacion';
+import RutaProtegida from './componentes/comunes/RutaProtegida';
+import Login from './componentes/Login';
 import Registro from './componentes/Registro';
 import CreacionCurriculum from './componentes/CreacionCurriculum';
 import ListaOfertas from './componentes/ListaOfertas';
@@ -26,27 +28,28 @@ export default function App() {
           <Navegacion />
           <main className="contenido-principal">
             <Routes>
-              {/* Ruta inicial redirige al registro */}
-              <Route path="/" element={<Navigate to="/registro" replace />} />
+              {/* Ruta inicial redirige al inicio de sesion */}
+              <Route path="/" element={<Navigate to="/login" replace />} />
+              <Route path="/login" element={<Login />} />
 
               {/* Flujo del joven */}
               <Route path="/registro" element={<Registro />} />
-              <Route path="/curriculum" element={<CreacionCurriculum />} />
-              <Route path="/ofertas" element={<ListaOfertas />} />
-              <Route path="/ofertas/:ofertaId" element={<DetalleOferta />} />
-              <Route path="/mis-postulaciones" element={<MisPostulaciones />} />
-              <Route path="/cursos" element={<ListaCursos />} />
-              <Route path="/cursos/:cursoId/examen" element={<ExamenCurso />} />
+              <Route path="/curriculum" element={<RutaProtegida rolPermitido="Joven"><CreacionCurriculum /></RutaProtegida>} />
+              <Route path="/ofertas" element={<RutaProtegida rolPermitido="Joven"><ListaOfertas /></RutaProtegida>} />
+              <Route path="/ofertas/:ofertaId" element={<RutaProtegida rolPermitido="Joven"><DetalleOferta /></RutaProtegida>} />
+              <Route path="/mis-postulaciones" element={<RutaProtegida rolPermitido="Joven"><MisPostulaciones /></RutaProtegida>} />
+              <Route path="/cursos" element={<RutaProtegida rolPermitido="Joven"><ListaCursos /></RutaProtegida>} />
+              <Route path="/cursos/:cursoId/examen" element={<RutaProtegida rolPermitido="Joven"><ExamenCurso /></RutaProtegida>} />
 
               {/* Flujo de empresa */}
               <Route path="/empresa/registro" element={<RegistroEmpresa />} />
-              <Route path="/empresa/ofertas" element={<GestionOfertas />} />
-              <Route path="/empresa/ofertas/nueva" element={<CreacionOferta />} />
-              <Route path="/empresa/ofertas/:ofertaId/candidatos" element={<CandidatosFiltrados />} />
-              <Route path="/empresa/ofertas/:ofertaId/candidatos/:postulacionId/feedback" element={<FeedbackPostulante />} />
+              <Route path="/empresa/ofertas" element={<RutaProtegida rolPermitido="Empresa"><GestionOfertas /></RutaProtegida>} />
+              <Route path="/empresa/ofertas/nueva" element={<RutaProtegida rolPermitido="Empresa"><CreacionOferta /></RutaProtegida>} />
+              <Route path="/empresa/ofertas/:ofertaId/candidatos" element={<RutaProtegida rolPermitido="Empresa"><CandidatosFiltrados /></RutaProtegida>} />
+              <Route path="/empresa/ofertas/:ofertaId/candidatos/:postulacionId/feedback" element={<RutaProtegida rolPermitido="Empresa"><FeedbackPostulante /></RutaProtegida>} />
 
               {/* Ruta no encontrada */}
-              <Route path="*" element={<Navigate to="/registro" replace />} />
+              <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
           </main>
         </BrowserRouter>

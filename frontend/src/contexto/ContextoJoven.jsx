@@ -17,15 +17,22 @@ export function ProveedorContextoJoven({ children }) {
   });
 
   /** Guarda el joven en el estado y en localStorage al registrarse o iniciar sesion */
-  function iniciarSesion(datosJoven) {
+  function iniciarSesion(datosJoven, token = null) {
     setJovenActual(datosJoven);
     localStorage.setItem('jovenActual', JSON.stringify(datosJoven));
+    localStorage.removeItem('empresaActual');
+    localStorage.setItem('rolSesion', 'Joven');
+    if (token) {
+      localStorage.setItem('tokenSesion', token);
+    }
   }
 
   /** Limpia la sesion del joven */
   function cerrarSesion() {
     setJovenActual(null);
     localStorage.removeItem('jovenActual');
+    localStorage.removeItem('tokenSesion');
+    localStorage.removeItem('rolSesion');
   }
 
   return (

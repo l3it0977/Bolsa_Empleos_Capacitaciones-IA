@@ -2,8 +2,8 @@
 // Permite crear una cuenta nueva y redirige al flujo principal.
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { registrarJoven } from '../api/clienteApi';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginJoven, registrarJoven } from '../api/clienteApi';
 import { useContextoJoven } from '../contexto/ContextoJoven';
 import MensajeError from './comunes/MensajeError';
 
@@ -57,11 +57,20 @@ export default function Registro() {
         nivelEducativo: Number(formulario.nivelEducativo),
       });
 
+      const respuestaLogin = await loginJoven(formulario.correoElectronico, formulario.contrasena);
+
       // Guarda el joven en el contexto y redirige
-      iniciarSesion(jovenRegistrado);
+      iniciarSesion(
+        {
+          ...jovenRegistrado,
+          id: respuestaLogin.usuario.id,
+        },
+        respuestaLogin.token
+      );
       navegar('/curriculum');
     } catch (err) {
       const mensajeError =
+        err.response?.data?.mensaje ||
         err.response?.data?.message ||
         err.response?.data ||
         'Ocurrio un error al registrarse. Verifique los datos e intente nuevamente.';
@@ -131,8 +140,8 @@ export default function Registro() {
             value={formulario.contrasena}
             onChange={manejarCambio}
             required
-            placeholder="Minimo 6 caracteres"
-            minLength={6}
+            placeholder="Minimo 8 caracteres"
+            minLength={8}
           />
         </div>
 
@@ -180,6 +189,10 @@ export default function Registro() {
           {cargando ? 'Registrando...' : 'Crear Cuenta'}
         </button>
       </form>
+
+      <p className="enlace-secundario">
+        ¿Ya tiene cuenta? <Link to="/login">Iniciar sesion</Link>
+      </p>
     </div>
   );
 }

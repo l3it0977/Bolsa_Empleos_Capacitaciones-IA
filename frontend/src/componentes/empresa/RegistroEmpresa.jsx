@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { registrarEmpresa } from '../../api/clienteApi';
+import { loginEmpresa, registrarEmpresa } from '../../api/clienteApi';
 import { useContextoEmpresa } from '../../contexto/ContextoEmpresa';
 import MensajeError from '../comunes/MensajeError';
 
@@ -48,8 +48,16 @@ export default function RegistroEmpresa() {
         sitioWeb: formulario.sitioWeb || null,
       });
 
+      const respuestaLogin = await loginEmpresa(formulario.correoElectronico, formulario.contrasena);
+
       // Guarda la empresa en el contexto y redirige al panel
-      iniciarSesionEmpresa(empresaRegistrada);
+      iniciarSesionEmpresa(
+        {
+          ...empresaRegistrada,
+          id: respuestaLogin.usuario.id,
+        },
+        respuestaLogin.token
+      );
       navegar('/empresa/ofertas');
     } catch (err) {
       const mensajeError =
@@ -171,7 +179,7 @@ export default function RegistroEmpresa() {
 
       <p className="enlace-secundario">
         ¿Ya tiene cuenta?{' '}
-        <Link to="/empresa/ofertas">Ir al panel de empresa</Link>
+        <Link to="/login">Iniciar sesion</Link>
       </p>
     </div>
   );
