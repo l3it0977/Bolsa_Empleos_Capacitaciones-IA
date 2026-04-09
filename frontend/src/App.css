@@ -7,61 +7,84 @@
 }
 
 body {
-  background-color: #f5f5f5;
-  color: #1a1a1a;
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* ---------------------------------------------------------------
-   NAVEGACION
+  NAVEGACION
 ---------------------------------------------------------------- */
 
 .navegacion {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1a237e;
-  color: #ffffff;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  color: #0f172a;
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .navegacion-marca a {
-  color: #ffffff;
-  font-size: 1.25rem;
-  font-weight: 700;
+  color: #4f46e5;
+  font-size: 1.5rem;
+  font-weight: 800;
   text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
 .navegacion-enlaces {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
   list-style: none;
 }
 
 .navegacion-enlaces a {
-  color: #e8eaf6;
+  color: #475569;
   text-decoration: none;
   font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 .navegacion-enlaces a:hover {
-  color: #ffffff;
-  text-decoration: underline;
+  color: #4f46e5;
 }
 
 .boton-cerrar-sesion {
-  background: transparent;
-  border: 1px solid #e8eaf6;
-  color: #e8eaf6;
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #ef4444;
   cursor: pointer;
-  padding: 0.35rem 0.75rem;
-  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
   font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
 }
 
 .boton-cerrar-sesion:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+}
+
+/* Responsive Navegacion */
+@media (max-width: 768px) {
+  .navegacion {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .navegacion-enlaces {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
 }
 
 /* ---------------------------------------------------------------
@@ -69,9 +92,17 @@ body {
 ---------------------------------------------------------------- */
 
 .contenido-principal {
-  max-width: 1100px;
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .contenido-principal {
+    padding: 1.5rem 1rem;
+  }
 }
 
 /* ---------------------------------------------------------------
@@ -79,42 +110,58 @@ body {
 ---------------------------------------------------------------- */
 
 .contenedor-formulario {
-  max-width: 620px;
-  margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
+  margin: 2rem auto;
   background-color: #ffffff;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
 }
 
 .contenedor-pagina {
   background-color: #ffffff;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+}
+
+@media (max-width: 640px) {
+  .contenedor-formulario, .contenedor-pagina {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
 }
 
 h1 {
-  font-size: 1.75rem;
-  margin-bottom: 0.5rem;
-  color: #1a237e;
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 h2 {
-  font-size: 1.3rem;
-  margin: 1.5rem 0 0.75rem;
-  color: #283593;
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+  color: #1e293b;
+  font-weight: 700;
 }
 
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin: 1rem 0 0.5rem;
-  color: #37474f;
+  color: #334155;
+  font-weight: 600;
 }
 
 .descripcion-seccion {
-  color: #546e7a;
-  margin-bottom: 1.5rem;
+  color: #64748b;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 /* ---------------------------------------------------------------
@@ -124,45 +171,47 @@ h3 {
 .campo {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .campo label {
   font-weight: 600;
-  margin-bottom: 0.35rem;
-  color: #37474f;
-  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-size: 0.9rem;
 }
 
 .campo input,
 .campo select,
 .campo textarea {
-  padding: 0.6rem 0.75rem;
-  border: 1px solid #b0bec5;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
   font-size: 1rem;
-  color: #1a1a1a;
-  background-color: #fafafa;
-  transition: border-color 0.2s;
+  color: #0f172a;
+  background-color: #ffffff;
+  transition: all 0.2s;
+  font-family: inherit;
 }
 
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
   outline: none;
-  border-color: #1a237e;
-  background-color: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
 .grupo-campos {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 640px) {
   .grupo-campos {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 }
 
@@ -171,48 +220,70 @@ h3 {
 ---------------------------------------------------------------- */
 
 .boton-primario {
-  background-color: #1a237e;
+  background-color: #4f46e5;
   color: #ffffff;
   border: none;
-  padding: 0.65rem 1.5rem;
-  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .boton-primario:hover:not(:disabled) {
-  background-color: #283593;
+  background-color: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.4);
 }
 
 .boton-primario:disabled {
-  opacity: 0.6;
+  background-color: #a5b4fc;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .boton-secundario {
-  background-color: #e8eaf6;
-  color: #1a237e;
-  border: 1px solid #9fa8da;
-  padding: 0.55rem 1.25rem;
-  border-radius: 4px;
-  font-size: 0.95rem;
+  background-color: #ffffff;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .boton-secundario:hover {
-  background-color: #c5cae9;
+  background-color: #eef2ff;
+  border-color: #a5b4fc;
 }
 
 .boton-volver {
+  display: inline-block;
   background: transparent;
   border: none;
-  color: #1a237e;
+  color: #475569;
   cursor: pointer;
-  font-size: 0.9rem;
-  padding: 0;
-  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.boton-volver:hover {
+  color: #0f172a;
   text-decoration: underline;
 }
 
@@ -221,21 +292,25 @@ h3 {
 ---------------------------------------------------------------- */
 
 .mensaje-error {
-  background-color: #ffebee;
-  border: 1px solid #ef9a9a;
-  border-radius: 4px;
-  color: #c62828;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .mensaje-exito {
-  background-color: #e8f5e9;
-  border: 1px solid #a5d6a7;
-  border-radius: 4px;
-  color: #2e7d32;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #15803d;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 /* ---------------------------------------------------------------
@@ -247,16 +322,17 @@ h3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem;
-  gap: 1rem;
-  color: #546e7a;
+  padding: 4rem;
+  gap: 1.25rem;
+  color: #64748b;
+  font-weight: 500;
 }
 
 .cargando-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #e8eaf6;
-  border-top-color: #1a237e;
+  width: 44px;
+  height: 44px;
+  border: 4px solid #f1f5f9;
+  border-top-color: #4f46e5;
   border-radius: 50%;
   animation: girar 0.8s linear infinite;
 }
@@ -271,87 +347,128 @@ h3 {
 
 .grilla-tarjetas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .tarjeta-oferta,
 .tarjeta-curso,
 .tarjeta-postulacion {
-  background-color: #f9f9fb;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta-oferta:hover,
+.tarjeta-curso:hover,
+.tarjeta-postulacion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .titulo-oferta,
 .titulo-curso {
-  font-size: 1.1rem;
-  color: #1a237e;
+  font-size: 1.25rem;
+  color: #0f172a;
   margin: 0;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .empresa-oferta,
 .empresa-postulacion {
   font-weight: 600;
-  color: #37474f;
+  color: #475569;
 }
 
 .ubicacion-oferta,
 .duracion-curso {
-  color: #607d8b;
-  font-size: 0.9rem;
+  color: #64748b;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .salario-oferta {
-  color: #2e7d32;
-  font-weight: 600;
+  color: #059669;
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
 .fecha-cierre-oferta {
-  color: #e65100;
+  color: #ea580c;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .descripcion-oferta,
 .descripcion-curso {
-  color: #546e7a;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .puntaje-minimo {
-  color: #37474f;
+  color: #334155;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .habilidad-curso {
-  color: #4527a0;
-  font-size: 0.9rem;
+  display: inline-block;
+  background-color: #e0e7ff;
+  color: #4338ca;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  align-self: flex-start;
 }
 
 .acciones-tarjeta {
   margin-top: auto;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .enlace-material {
   display: inline-block;
-  color: #1a237e;
+  color: #4f46e5;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.enlace-material:hover {
   text-decoration: underline;
-  font-size: 0.9rem;
+  color: #3730a3;
 }
 
 .sin-resultados {
   text-align: center;
-  padding: 2rem;
-  color: #607d8b;
+  padding: 3rem;
+  color: #64748b;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px dashed #cbd5e1;
+  grid-column: 1 / -1;
+  font-size: 1.1rem;
 }
 
 /* ---------------------------------------------------------------
@@ -359,84 +476,106 @@ h3 {
 ---------------------------------------------------------------- */
 
 .estado-evaluacion {
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.25rem 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.estado-0 { color: #f57f17; }
-.estado-1 { color: #1565c0; }
-.estado-2 { color: #2e7d32; }
-.estado-3 { color: #c62828; }
+.estado-0 { background-color: #fffbeb; color: #ca8a04; } /* Pendiente */
+.estado-1 { background-color: #eff6ff; color: #2563eb; } /* EnProgreso */
+.estado-2 { background-color: #f0fdf4; color: #16a34a; } /* Aprobado */
+.estado-3 { background-color: #fef2f2; color: #dc2626; } /* Reprobado */
 
 /* ---------------------------------------------------------------
    DETALLE DE OFERTA
 ---------------------------------------------------------------- */
 
 .detalle-oferta {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .lista-requisitos {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .item-requisito {
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  padding: 0.5rem 0.75rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
 }
 
 .etiqueta-obligatorio {
-  color: #c62828;
+  color: #dc2626;
   font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
 }
 
 .seccion-postulacion {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e0e0e0;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
 }
 
 .resultado-evaluacion {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .evaluacion-aprobada {
-  color: #2e7d32;
+  color: #16a34a;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #f0fdf4;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #bbf7d0;
 }
 
 .evaluacion-rechazada {
-  color: #c62828;
+  color: #dc2626;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #fef2f2;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
 }
 
 .lista-brechas {
-  background-color: #fff3e0;
-  border: 1px solid #ffcc80;
-  border-radius: 4px;
-  padding: 0.75rem 1rem 0.75rem 1.5rem;
-  margin-bottom: 1rem;
+  background-color: #fffbeb;
+  border: 1px solid #fde047;
+  border-radius: 8px;
+  padding: 1.25rem 1.25rem 1.25rem 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #854d0e;
 }
 
 .lista-cursos-sugeridos {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .item-curso-sugerido {
-  background-color: #e8f5e9;
-  border: 1px solid #a5d6a7;
-  border-radius: 6px;
-  padding: 0.75rem;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.item-curso-sugerido:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 /* ---------------------------------------------------------------
@@ -444,57 +583,67 @@ h3 {
 ---------------------------------------------------------------- */
 
 .seccion-habilidades {
-  margin-top: 2rem;
-  border-top: 1px solid #e0e0e0;
-  padding-top: 1.5rem;
+  margin-top: 2.5rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 2rem;
 }
 
 .lista-etiquetas {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.75rem;
   list-style: none;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .etiqueta-habilidad {
-  background-color: #e8eaf6;
-  color: #283593;
-  border-radius: 20px;
-  padding: 0.3rem 0.85rem;
+  background-color: #e0e7ff;
+  color: #4338ca;
+  border-radius: 9999px;
+  padding: 0.4rem 1rem;
   font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .insignia-curso {
-  color: #4527a0;
+  color: #059669;
   font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 0.25rem;
 }
 
 .grilla-habilidades {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .tarjeta-habilidad {
-  background-color: #fafafa;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 0.75rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta-habilidad:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .nombre-habilidad {
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 .categoria-habilidad {
-  color: #607d8b;
-  font-size: 0.85rem;
+  color: #475569;
+  font-size: 0.9rem;
 }
 
 /* ---------------------------------------------------------------
@@ -502,74 +651,92 @@ h3 {
 ---------------------------------------------------------------- */
 
 .informacion-examen {
-  background-color: #e8eaf6;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
+  background-color: #eff6ff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #bfdbfe;
 }
 
 .informacion-examen p {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  color: #1e3a8a;
 }
 
 .aviso-material {
-  background-color: #fff8e1;
-  border: 1px solid #ffe082;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
+  background-color: #fffbeb;
+  border: 1px solid #fef08a;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #854d0e;
 }
 
 .lista-preguntas {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .item-pregunta {
-  background-color: #f9f9fb;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .texto-pregunta {
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
 }
 
 .lista-opciones {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .opcion-respuesta label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.opcion-respuesta label:hover {
+  background-color: #f1f5f9;
 }
 
 .respuesta-abierta {
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #b0bec5;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
   font-size: 1rem;
   resize: vertical;
+  background-color: #f8fafc;
+  font-family: inherit;
 }
 
 .respuesta-abierta:focus {
   outline: none;
-  border-color: #1a237e;
+  border-color: #4f46e5;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
 .acciones-examen {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 /* ---------------------------------------------------------------
@@ -577,147 +744,148 @@ h3 {
 ---------------------------------------------------------------- */
 
 .resultado-final {
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 1rem 0;
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
 }
 
 .resultado-aprobado {
-  background-color: #e8f5e9;
-  border: 2px solid #66bb6a;
+  background-color: #f0fdf4;
+  border: 2px solid #22c55e;
 }
 
 .resultado-desaprobado {
-  background-color: #ffebee;
-  border: 2px solid #ef9a9a;
+  background-color: #fef2f2;
+  border: 2px solid #ef4444;
 }
 
 .puntaje-resultado {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  color: #0f172a;
 }
 
 .estado-resultado {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .titulo-curso-resultado {
-  color: #546e7a;
-  margin-bottom: 1rem;
+  color: #475569;
+  margin-bottom: 1.5rem;
 }
 
 .retroalimentacion {
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: left;
+  line-height: 1.6;
 }
 
 .feedback-preguntas {
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 .feedback-preguntas ol {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-left: 1.5rem;
 }
 
 .item-feedback {
-  padding: 0.75rem;
-  border-radius: 4px;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .item-feedback p {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
 }
 
 .correcto {
-  background-color: #f1f8e9;
-  border-left: 4px solid #66bb6a;
+  background-color: #f0fdf4;
+  border-left: 4px solid #16a34a;
 }
 
 .incorrecto {
-  background-color: #fce4ec;
-  border-left: 4px solid #ef9a9a;
+  background-color: #fef2f2;
+  border-left: 4px solid #dc2626;
 }
 
 .acciones-resultado {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  justify-content: center;
 }
 
 /* ---------------------------------------------------------------
-   POSTULACIONES
+   POSTULACIONES Y TARJETAS EXTRA
 ---------------------------------------------------------------- */
 
 .fecha-postulacion {
-  color: #607d8b;
-  font-size: 0.9rem;
+  color: #64748b;
+  font-size: 0.95rem;
 }
 
 .estado-postulacion {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
-
-.estado-0 { color: #f57f17; }
-.estado-1 { color: #1565c0; }
-.estado-2 { color: #2e7d32; }
-.estado-3 { color: #c62828; }
 
 /* ---------------------------------------------------------------
    ACCIONES DE NAVEGACION
 ---------------------------------------------------------------- */
 
 .acciones-navegacion {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   display: flex;
   justify-content: flex-end;
 }
 
 /* ---------------------------------------------------------------
-   MODULO EMPRESA - NAVEGACION
+   MODULO EMPRESA - NAVEGACION Y PANEL
 ---------------------------------------------------------------- */
 
 .nombre-empresa-nav {
-  color: #e8eaf6;
-  font-size: 0.9rem;
-  font-weight: 600;
+  color: #4f46e5;
+  font-size: 1rem;
+  font-weight: 700;
   padding: 0.2rem 0;
 }
-
-/* ---------------------------------------------------------------
-   MODULO EMPRESA - PANEL PRINCIPAL
----------------------------------------------------------------- */
 
 .encabezado-panel {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 
 .nombre-empresa-panel {
-  color: #546e7a;
-  font-size: 0.95rem;
-  margin-top: 0.25rem;
+  color: #64748b;
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
 }
 
 .contador-candidatos {
-  background-color: #e8eaf6;
-  color: #283593;
-  border-radius: 20px;
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+  background-color: #e0e7ff;
+  color: #4338ca;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
   white-space: nowrap;
   align-self: center;
 }
@@ -727,34 +895,42 @@ h3 {
 ---------------------------------------------------------------- */
 
 .tarjeta-oferta-empresa {
-  background-color: #f9f9fb;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta-oferta-empresa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .cabecera-tarjeta-oferta {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .etiqueta-estado-oferta {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  padding: 0.25rem 0.65rem;
-  border-radius: 12px;
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
   white-space: nowrap;
 }
 
-.estado-oferta-0 { background-color: #f5f5f5; color: #616161; }
-.estado-oferta-1 { background-color: #e8f5e9; color: #2e7d32; }
-.estado-oferta-2 { background-color: #e8eaf6; color: #283593; }
-.estado-oferta-3 { background-color: #fbe9e7; color: #bf360c; }
+.estado-oferta-0 { background-color: #f1f5f9; color: #475569; } /* Borrador */
+.estado-oferta-1 { background-color: #dcfce7; color: #16a34a; } /* Publicada */
+.estado-oferta-2 { background-color: #dbeafe; color: #2563eb; } /* EnEvaluacion */
+.estado-oferta-3 { background-color: #fee2e2; color: #dc2626; } /* Cerrada */
+
 .estado-oferta-4 { background-color: #ffebee; color: #c62828; }
 
 .cantidad-requisitos {
@@ -1009,7 +1185,7 @@ h3 {
 }
 
 /* ---------------------------------------------------------------
-   MODULO EMPRESA - FORMULARIO
+  MODULO EMPRESA - FORMULARIO
 ---------------------------------------------------------------- */
 
 .acciones-formulario {
